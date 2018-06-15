@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/header_bar"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:text="@string/root_project_list_bt_add"
+            android:id="@+id/bt_create_new_project"
+            android:layout_gravity="center_horizontal"
+            android:padding="5dip"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="#FFF"
+            android:background="#027ae3"
+            android:textSize="25sp"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp">
+            <AutoCompleteTextView
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/actv_search"
+                android:hint="@string/pl_et_hint_project_name"
+                android:singleLine="true"
+                android:textSize="20sp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pl_bt_search"
+                android:id="@+id/bt_search"
+                android:singleLine="true"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pl_tv_project_name"
+            android:textSize="30sp"
+            android:layout_marginStart="10dp"/>
+        <include layout="@layout/project_list_view"/>
+    </LinearLayout>
+</LinearLayout>

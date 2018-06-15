@@ -1,0 +1,38 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.thetigerparty.argodflib.SubView.TrackerActivity.Fragment.LocationFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+            <org.osmdroid.views.MapView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/location_fragment_map_view">
+
+            </org.osmdroid.views.MapView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:background="@color/tracker_activity_location_fragment_linearlayout_background"
+            android:gravity="center">
+            <Button
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/location_fragment_location_btn_shape"
+                android:textColor="@color/tracker_activity_location_fragment_bt_confirm"
+                android:text="@string/location_fragment_bt_confirm_location"
+                android:textAllCaps="false"
+                android:id="@+id/location_fragment_bt_location_confirm"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

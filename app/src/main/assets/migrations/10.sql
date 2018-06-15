@@ -1,0 +1,11 @@
+DROP TABLE IF EXISTS category;
+DROP TABLE IF EXISTS relation_project_belong_category;
+CREATE TABLE argo_config ('key' TEXT, 'value' TEXT);
+INSERT INTO argo_config ("key", "value") VALUES ("remember_username", "");
+INSERT INTO argo_config ("key", "value") VALUES ("remember_password", "");
+INSERT INTO argo_config ("key", "value") VALUES ("remember_reporter_name", "");
+INSERT INTO argo_config ("key", "value") VALUES ("remember_reporter_email", "");
+ALTER TABLE report ADD COLUMN reporter_name TEXT;
+ALTER TABLE report ADD COLUMN reporter_email TEXT;
+UPDATE report set reporter_name = "";
+UPDATE report set reporter_email = "";

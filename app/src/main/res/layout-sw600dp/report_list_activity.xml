@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:weightSum="1">
+    <include layout="@layout/header_bar"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rl_tv_rl_for"
+            android:layout_gravity="center"
+            android:id="@+id/textView12"
+            android:textSize="30sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rl_tv_project_name"
+            android:layout_gravity="center"
+            android:id="@+id/tv_project_name"
+            android:textSize="30sp"/>
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center_horizontal"
+                  android:layout_marginTop="10dp"
+                  android:focusable="true"
+                  android:focusableInTouchMode="true">
+        <EditText android:layout_width="300dp"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/et_search"
+                  android:textSize="20sp"
+                  android:singleLine="true"
+                  android:hint="Report name"/>
+        <Button android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search"
+                android:id="@+id/bt_search"
+                android:textSize="20sp"
+                android:singleLine="true"/>
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:weightSum="1"
+                  android:layout_marginStart="25dp"
+                  android:layout_marginEnd="25dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rl_tv_status"
+                    android:textSize="20sp"
+                    android:layout_marginStart="100dp"
+                    android:layout_centerVertical="true"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rl_tv_title"
+                    android:textSize="20sp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="250dp"
+                    android:maxWidth="200dp"
+                    android:visibility="gone"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rl_tv_created_time"
+                    android:textSize="18sp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="200dp"
+                    android:maxWidth="100dp"/>
+
+        </RelativeLayout>
+        <ListView android:layout_width="wrap_content"
+                  android:layout_height="match_parent"
+                  android:id="@+id/lv_report"/>
+    </LinearLayout>
+</LinearLayout>

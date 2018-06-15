@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/activity_background">
+        <include layout="@layout/header_bar"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/activity_background">
+                <include layout="@layout/header"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/caption_img_layout">
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_picture"
+                android:layout_margin="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12sp"
+                        android:layout_marginRight="12sp"
+                        android:id="@+id/caption_edit_header"
+                        android:hint="@string/caption_ev_hint_header"
+                        android:textSize="30sp"
+                        android:layout_weight="1"
+                        />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="100sp"
+                        android:layout_marginLeft="12sp"
+                        android:layout_marginRight="12sp"
+                        android:id="@+id/caption_edit"
+                        android:hint="@string/caption_ev_hint_description"
+                        android:layout_weight="1" />
+                </LinearLayout>
+                <include layout="@layout/horizontal_line"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_weight="0.5"
+                        android:layout_margin="20dp"
+                        android:id="@+id/caption_bt_cancel"
+                        android:text="@string/caption_bt_cancel"
+                        android:textSize="30sp"
+                        android:background="#666666"
+                        android:textColor="#FFF"
+                        android:textAllCaps="true"/>
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_weight="0.5"
+                        android:layout_margin="20dp"
+                        android:id="@+id/caption_bt_save"
+                        android:text="@string/caption_bt_save"
+                        android:textSize="30sp"
+                        android:background="#106ec0"
+                        android:textColor="#FFF"
+                        android:textAllCaps="true"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,514 @@
+apply plugin: 'com.android.application'
+
+def getGitHash = { ->
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', '--short', 'HEAD'
+        standardOutput = stdout
+    }
+    return stdout.toString().trim()
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+    defaultConfig {
+        applicationId "com.thetigerparty.argodf"
+        minSdkVersion 17
+        targetSdkVersion 23
+        versionCode 4
+        versionName "4_0_3"
+    }
+    signingConfigs {
+        release {
+            storeFile file("argodf.jks")
+            storePassword "argodf"
+            keyAlias "ArgoDF"
+            keyPassword "argodf"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    sourceSets {
+        libStg.res.srcDirs = ['src/liberia/res']
+        libProd.res.srcDirs = ['src/liberia/res']
+        gsStg.res.srcDirs = ['src/gs/res']
+        gsProd.res.srcDirs = ['src/gs/res']
+        gamaStg.res.srcDirs = ['src/gama/res']
+        gamaProd.res.srcDirs = ['src/gama/res']
+        indiaStg.res.srcDirs = ['src/india/res']
+        indiaProd.res.srcDirs = ['src/india/res']
+        ningoStg.res.srcDirs = ['src/ningo/res']
+        ningoProd.res.srcDirs = ['src/ningo/res']
+        zambiaStg.res.srcDirs = ['src/zambia/res']
+        stmaStg.res.srcDirs = ['src/stma/res']
+        stmaProd.res.srcDirs = ['src/stma/res']
+        iwaiStg.res.srcDirs = ['src/iwai/res']
+    }
+    dataBinding {
+        enabled = true
+    }
+
+    productFlavors {
+        def STG_HOST = "http://125.227.249.37"
+        def STG_PORT = ""
+        def PROD_HOST = ""
+        def SMS_NUMBER = "+886903778079"
+        def DOWNLOAD_URI = "/api/v4/download/${defaultConfig.versionName}"
+        def SUBMIT_URI = "/api/v4/submit/${defaultConfig.versionName}"
+        def CURRENT_VERSION_URI = "/api/v4/version"
+        def REPORTER_LOCATION_URI = "/api/v4/reporter_location"
+        def DOWNLOAD_APP_URI = "/apk/argo.apk"
+        def GIT_COMMIT_NUMBER = "\"${getGitHash()}\""
+        dev {
+            def DEV_HOST = InetAddress.getLocalHost().getCanonicalHostName()
+            applicationId "com.thetigerparty.argodf.dev"
+            buildConfigField 'String', 'SMS_NUMBER', '"' + SMS_NUMBER + '"'
+            buildConfigField 'int', 'DEFAULT_ROOT_CONTAINER_ID', "1"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LATITUDE', "25.006267"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LONGITUDE', "121.486162"
+            buildConfigField 'String', 'GIT_COMMIT_NUMBER', GIT_COMMIT_NUMBER
+
+            // Function Config
+            buildConfigField 'boolean', 'VIDEO_RECORD_ENABLE', 'true'
+            buildConfigField 'boolean', 'LOCATION_SERVICE_ENABLE', 'false'
+            buildConfigField 'boolean', 'CAPTION_ACTIVITY_ENABLE', 'true'
+            buildConfigField 'boolean', 'AUTO_DATA_SYNC_ENABLE', 'true'
+            buildConfigField 'boolean', 'SMS_ENABLE', 'false'
+            buildConfigField 'boolean', 'GUEST_LOGIN_ENABLE', 'true'
+            // URL List
+            buildConfigField 'String', 'DOWNLOAD_DATA_API', '"http://' + DEV_HOST + DOWNLOAD_URI + '"'
+            buildConfigField 'String', 'SUBMIT_DATA_API', '"http://' + DEV_HOST + SUBMIT_URI + '"'
+            buildConfigField 'String', 'CURRENT_VERSION_API', '"http://' + DEV_HOST + CURRENT_VERSION_URI + '"'
+            buildConfigField 'String', 'REPORTER_LOCATION_API', '"http://' + DEV_HOST + REPORTER_LOCATION_URI + '"'
+            buildConfigField 'String', 'DOWNLOAD_APP_URL', '"http://' + DEV_HOST + DOWNLOAD_APP_URI + '"'
+            // String Value
+            resValue "string", "app_name", "DEV WANTOK ARGODF"
+            resValue "string", "header_title", "DEV WANTOK ARGODF"
+        }
+        wantok {
+            STG_PORT = "21880"
+            applicationId "com.thetigerparty.argodf.stg"
+            buildConfigField 'String', 'SMS_NUMBER', '"' + SMS_NUMBER + '"'
+            buildConfigField 'int', 'DEFAULT_ROOT_CONTAINER_ID', "1"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LATITUDE', "25.006267"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LONGITUDE', "121.486162"
+            buildConfigField 'String', 'GIT_COMMIT_NUMBER', GIT_COMMIT_NUMBER
+
+            // Function Config
+            buildConfigField 'boolean', 'VIDEO_RECORD_ENABLE', 'true'
+            buildConfigField 'boolean', 'LOCATION_SERVICE_ENABLE', 'true'
+            buildConfigField 'boolean', 'CAPTION_ACTIVITY_ENABLE', 'true'
+            buildConfigField 'boolean', 'AUTO_DATA_SYNC_ENABLE', 'true'
+            buildConfigField 'boolean', 'SMS_ENABLE', 'true'
+            buildConfigField 'boolean', 'GUEST_LOGIN_ENABLE', 'true'
+            // URL List
+            buildConfigField 'String', 'DOWNLOAD_DATA_API', '"' + STG_HOST + ':' + STG_PORT + DOWNLOAD_URI + '"'
+            buildConfigField 'String', 'SUBMIT_DATA_API', '"' + STG_HOST + ':' + STG_PORT + SUBMIT_URI + '"'
+            buildConfigField 'String', 'CURRENT_VERSION_API', '"' + STG_HOST + ':' + STG_PORT + CURRENT_VERSION_URI + '"'
+            buildConfigField 'String', 'REPORTER_LOCATION_API', '"' + STG_HOST + ':' + STG_PORT + REPORTER_LOCATION_URI + '"'
+            buildConfigField 'String', 'DOWNLOAD_APP_URL', '"' + STG_HOST + ':' + STG_PORT + DOWNLOAD_APP_URI + '"'
+            // String Value
+            resValue "string", "app_name", "STG WANTOK ARGODF"
+            resValue "string", "header_title", "STG WANTOK ARGODF"
+        }
+        libStg {
+            STG_PORT = "20680"
+            applicationId "com.thetigerparty.argodflib.stg"
+            buildConfigField 'String', 'SMS_NUMBER', '"' + SMS_NUMBER + '"'
+            buildConfigField 'int', 'DEFAULT_ROOT_CONTAINER_ID', "1"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LATITUDE', "6.290961"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LONGITUDE', "-10.578492"
+            buildConfigField 'String', 'GIT_COMMIT_NUMBER', GIT_COMMIT_NUMBER
+
+            // Function Config
+            buildConfigField 'boolean', 'VIDEO_RECORD_ENABLE', 'true'
+            buildConfigField 'boolean', 'LOCATION_SERVICE_ENABLE', 'true'
+            buildConfigField 'boolean', 'CAPTION_ACTIVITY_ENABLE', 'true'
+            buildConfigField 'boolean', 'AUTO_DATA_SYNC_ENABLE', 'true'
+            buildConfigField 'boolean', 'SMS_ENABLE', 'true'
+            buildConfigField 'boolean', 'GUEST_LOGIN_ENABLE', 'true'
+            // URL List
+            buildConfigField 'String', 'DOWNLOAD_DATA_API', '"' + STG_HOST + ':' + STG_PORT + DOWNLOAD_URI + '"'
+            buildConfigField 'String', 'SUBMIT_DATA_API', '"' + STG_HOST + ':' + STG_PORT + SUBMIT_URI + '"'
+            buildConfigField 'String', 'CURRENT_VERSION_API', '"' + STG_HOST + ':' + STG_PORT + CURRENT_VERSION_URI + '"'
+            buildConfigField 'String', 'REPORTER_LOCATION_API', '"' + STG_HOST + ':' + STG_PORT + REPORTER_LOCATION_URI + '"'
+            buildConfigField 'String', 'DOWNLOAD_APP_URL', '"' + STG_HOST + ':' + STG_PORT + DOWNLOAD_APP_URI + '"'
+            // String Value
+            resValue "string", "app_name", "STG Liberia Infrastructure Monitoring"
+            resValue "string", "header_title", "STG Liberia Infrastructure Monitoring"
+        }
+        libProd {
+            PROD_HOST = "http://iiu-monitor.org"
+            applicationId "com.thetigerparty.argodflib"
+            buildConfigField 'String', 'SMS_NUMBER', '"+231770185885"'
+            buildConfigField 'int', 'DEFAULT_ROOT_CONTAINER_ID', "1"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LATITUDE', "6.290961"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LONGITUDE', "-10.578492"
+            buildConfigField 'String', 'GIT_COMMIT_NUMBER', GIT_COMMIT_NUMBER
+
+            // Function Config
+            buildConfigField 'boolean', 'VIDEO_RECORD_ENABLE', 'true'
+            buildConfigField 'boolean', 'LOCATION_SERVICE_ENABLE', 'true'
+            buildConfigField 'boolean', 'CAPTION_ACTIVITY_ENABLE', 'true'
+            buildConfigField 'boolean', 'AUTO_DATA_SYNC_ENABLE', 'true'
+            buildConfigField 'boolean', 'SMS_ENABLE', 'true'
+            buildConfigField 'boolean', 'GUEST_LOGIN_ENABLE', 'true'
+            // URL List
+            buildConfigField 'String', 'DOWNLOAD_DATA_API', '"' + PROD_HOST + DOWNLOAD_URI + '"'
+            buildConfigField 'String', 'SUBMIT_DATA_API', '"' + PROD_HOST + SUBMIT_URI + '"'
+            buildConfigField 'String', 'CURRENT_VERSION_API', '"' + PROD_HOST + CURRENT_VERSION_URI + '"'
+            buildConfigField 'String', 'REPORTER_LOCATION_API', '"' + PROD_HOST + REPORTER_LOCATION_URI + '"'
+            buildConfigField 'String', 'DOWNLOAD_APP_URL', '"' + PROD_HOST + DOWNLOAD_APP_URI + '"'
+            // String Value
+            resValue "string", "app_name", "Liberia Infrastructure Monitoring"
+            resValue "string", "header_title", "Liberia Infrastructure Monitoring"
+        }
+        gsStg {
+            STG_PORT = "20180"
+            applicationId "com.thetigerparty.argodfgs.stg"
+            buildConfigField 'String', 'SMS_NUMBER', '"' + SMS_NUMBER + '"'
+            buildConfigField 'int', 'DEFAULT_ROOT_CONTAINER_ID', "1"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LATITUDE', "7.9569523"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LONGITUDE', "-2.3306559"
+            buildConfigField 'String', 'GIT_COMMIT_NUMBER', GIT_COMMIT_NUMBER
+
+            // Function Config
+            buildConfigField 'boolean', 'VIDEO_RECORD_ENABLE', 'true'
+            buildConfigField 'boolean', 'LOCATION_SERVICE_ENABLE', 'true'
+            buildConfigField 'boolean', 'CAPTION_ACTIVITY_ENABLE', 'true'
+            buildConfigField 'boolean', 'AUTO_DATA_SYNC_ENABLE', 'true'
+            buildConfigField 'boolean', 'SMS_ENABLE', 'false'
+            buildConfigField 'boolean', 'GUEST_LOGIN_ENABLE', 'false'
+            // URL List
+            buildConfigField 'String', 'DOWNLOAD_DATA_API', '"' + STG_HOST + ':' + STG_PORT + DOWNLOAD_URI + '"'
+            buildConfigField 'String', 'SUBMIT_DATA_API', '"' + STG_HOST + ':' + STG_PORT + SUBMIT_URI + '"'
+            buildConfigField 'String', 'CURRENT_VERSION_API', '"' + STG_HOST + ':' + STG_PORT + CURRENT_VERSION_URI + '"'
+            buildConfigField 'String', 'REPORTER_LOCATION_API', '"' + STG_HOST + ':' + STG_PORT + REPORTER_LOCATION_URI + '"'
+            buildConfigField 'String', 'DOWNLOAD_APP_URL', '"' + STG_HOST + ':' + STG_PORT + DOWNLOAD_APP_URI + '"'
+            // String Value
+            resValue "string", "app_name", "Ghana Education Service"
+            resValue "string", "header_title", "Ghana Education Service"
+        }
+        gsProd {
+            PROD_HOST = "http://ghanaschoolsinfo.org"
+            applicationId "com.thetigerparty.argodf"
+            buildConfigField 'String', 'SMS_NUMBER', '""'
+            buildConfigField 'int', 'DEFAULT_ROOT_CONTAINER_ID', "1"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LATITUDE', "7.9569523"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LONGITUDE', "-2.3306559"
+            buildConfigField 'String', 'GIT_COMMIT_NUMBER', GIT_COMMIT_NUMBER
+
+            // Function Config
+            buildConfigField 'boolean', 'VIDEO_RECORD_ENABLE', 'true'
+            buildConfigField 'boolean', 'LOCATION_SERVICE_ENABLE', 'true'
+            buildConfigField 'boolean', 'CAPTION_ACTIVITY_ENABLE', 'true'
+            buildConfigField 'boolean', 'AUTO_DATA_SYNC_ENABLE', 'true'
+            buildConfigField 'boolean', 'SMS_ENABLE', 'false'
+            buildConfigField 'boolean', 'GUEST_LOGIN_ENABLE', 'false'
+            // URL List
+            buildConfigField 'String', 'DOWNLOAD_DATA_API', '"' + PROD_HOST + DOWNLOAD_URI + '"'
+            buildConfigField 'String', 'SUBMIT_DATA_API', '"' + PROD_HOST + SUBMIT_URI + '"'
+            buildConfigField 'String', 'CURRENT_VERSION_API', '"' + PROD_HOST + CURRENT_VERSION_URI + '"'
+            buildConfigField 'String', 'REPORTER_LOCATION_API', '"' + PROD_HOST + REPORTER_LOCATION_URI + '"'
+            buildConfigField 'String', 'DOWNLOAD_APP_URL', '"' + PROD_HOST + DOWNLOAD_APP_URI + '"'
+            // String Value
+            resValue "string", "app_name", "Ghana Education Service"
+            resValue "string", "header_title", "Ghana Education Service"
+        }
+        gamaStg {
+            STG_PORT = "21680"
+            applicationId "com.thetigerparty.argogama.stg"
+            buildConfigField 'String', 'SMS_NUMBER', '"' + SMS_NUMBER + '"'
+            buildConfigField 'int', 'DEFAULT_ROOT_CONTAINER_ID', "1"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LATITUDE', "5.6"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LONGITUDE', "-0.4"
+            buildConfigField 'String', 'GIT_COMMIT_NUMBER', GIT_COMMIT_NUMBER
+
+            // Function Config
+            buildConfigField 'boolean', 'VIDEO_RECORD_ENABLE', 'false'
+            buildConfigField 'boolean', 'LOCATION_SERVICE_ENABLE', 'true'
+            buildConfigField 'boolean', 'CAPTION_ACTIVITY_ENABLE', 'false'
+            buildConfigField 'boolean', 'AUTO_DATA_SYNC_ENABLE', 'true'
+            buildConfigField 'boolean', 'SMS_ENABLE', 'true'
+            buildConfigField 'boolean', 'GUEST_LOGIN_ENABLE', 'false'
+            // URL List
+            buildConfigField 'String', 'DOWNLOAD_DATA_API', '"' + STG_HOST + ':' + STG_PORT + DOWNLOAD_URI + '"'
+            buildConfigField 'String', 'SUBMIT_DATA_API', '"' + STG_HOST + ':' + STG_PORT + SUBMIT_URI + '"'
+            buildConfigField 'String', 'CURRENT_VERSION_API', '"' + STG_HOST + ':' + STG_PORT + CURRENT_VERSION_URI + '"'
+            buildConfigField 'String', 'REPORTER_LOCATION_API', '"' + STG_HOST + ':' + STG_PORT + REPORTER_LOCATION_URI + '"'
+            buildConfigField 'String', 'DOWNLOAD_APP_URL', '"' + STG_HOST + ':' + STG_PORT + DOWNLOAD_APP_URI + '"'
+            // String Value
+            resValue "string", "app_name", "STG Ghana Districts Monitor"
+            resValue "string", "header_title", "STG Ghana Districts Monitor"
+        }
+        gamaProd {
+            PROD_HOST = "http://www.ghdistrictsmonitor.org"
+            applicationId "com.thetigerparty.argogama"
+            buildConfigField 'String', 'SMS_NUMBER', '"+233544444940"'
+            buildConfigField 'int', 'DEFAULT_ROOT_CONTAINER_ID', "1"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LATITUDE', "5.6"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LONGITUDE', "-0.4"
+            buildConfigField 'String', 'GIT_COMMIT_NUMBER', GIT_COMMIT_NUMBER
+
+            // Function Config
+            buildConfigField 'boolean', 'VIDEO_RECORD_ENABLE', 'false'
+            buildConfigField 'boolean', 'LOCATION_SERVICE_ENABLE', 'true'
+            buildConfigField 'boolean', 'CAPTION_ACTIVITY_ENABLE', 'false'
+            buildConfigField 'boolean', 'AUTO_DATA_SYNC_ENABLE', 'true'
+            buildConfigField 'boolean', 'SMS_ENABLE', 'true'
+            buildConfigField 'boolean', 'GUEST_LOGIN_ENABLE', 'false'
+            // URL List
+            buildConfigField 'String', 'DOWNLOAD_DATA_API', '"' + PROD_HOST + DOWNLOAD_URI + '"'
+            buildConfigField 'String', 'SUBMIT_DATA_API', '"' + PROD_HOST + SUBMIT_URI + '"'
+            buildConfigField 'String', 'CURRENT_VERSION_API', '"' + PROD_HOST + CURRENT_VERSION_URI + '"'
+            buildConfigField 'String', 'REPORTER_LOCATION_API', '"' + PROD_HOST + REPORTER_LOCATION_URI + '"'
+            buildConfigField 'String', 'DOWNLOAD_APP_URL', '"' + PROD_HOST + DOWNLOAD_APP_URI + '"'
+            // String Value
+            resValue "string", "app_name", "Ghana Districts Monitor"
+            resValue "string", "header_title", "Ghana Districts Monitor"
+        }
+        indiaStg {
+            STG_PORT = "21280"
+            applicationId "com.thetigerparty.argodfindia.stg"
+            buildConfigField 'String', 'SMS_NUMBER', '"' + SMS_NUMBER + '"'
+            buildConfigField 'int', 'DEFAULT_ROOT_CONTAINER_ID', "1"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LATITUDE', "27.334"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LONGITUDE', "78.764"
+            buildConfigField 'String', 'GIT_COMMIT_NUMBER', GIT_COMMIT_NUMBER
+
+            // Function Config
+            buildConfigField 'boolean', 'VIDEO_RECORD_ENABLE', 'true'
+            buildConfigField 'boolean', 'LOCATION_SERVICE_ENABLE', 'true'
+            buildConfigField 'boolean', 'CAPTION_ACTIVITY_ENABLE', 'true'
+            buildConfigField 'boolean', 'AUTO_DATA_SYNC_ENABLE', 'true'
+            buildConfigField 'boolean', 'SMS_ENABLE', 'true'
+            buildConfigField 'boolean', 'GUEST_LOGIN_ENABLE', 'false'
+            // URL List
+            buildConfigField 'String', 'DOWNLOAD_DATA_API', '"' + STG_HOST + ':' + STG_PORT + DOWNLOAD_URI + '"'
+            buildConfigField 'String', 'SUBMIT_DATA_API', '"' + STG_HOST + ':' + STG_PORT + SUBMIT_URI + '"'
+            buildConfigField 'String', 'CURRENT_VERSION_API', '"' + STG_HOST + ':' + STG_PORT + CURRENT_VERSION_URI + '"'
+            buildConfigField 'String', 'REPORTER_LOCATION_API', '"' + STG_HOST + ':' + STG_PORT + REPORTER_LOCATION_URI + '"'
+            buildConfigField 'String', 'DOWNLOAD_APP_URL', '"' + STG_HOST + ':' + STG_PORT + DOWNLOAD_APP_URI + '"'
+            // String Value
+            resValue "string", "app_name", "STG India Infrastructure Monitoring"
+            resValue "string", "header_title", "STG India Infrastructure Monitoring"
+        }
+        indiaProd {
+            PROD_HOST = "http://www.dfccilmonitor.com"
+            applicationId "com.thetigerparty.argodfindia"
+            buildConfigField 'String', 'SMS_NUMBER', '"+886903778079"'
+            buildConfigField 'int', 'DEFAULT_ROOT_CONTAINER_ID', "1"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LATITUDE', "27.334"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LONGITUDE', "78.764"
+            buildConfigField 'String', 'GIT_COMMIT_NUMBER', GIT_COMMIT_NUMBER
+
+            // Function Config
+            buildConfigField 'boolean', 'VIDEO_RECORD_ENABLE', 'true'
+            buildConfigField 'boolean', 'LOCATION_SERVICE_ENABLE', 'true'
+            buildConfigField 'boolean', 'CAPTION_ACTIVITY_ENABLE', 'true'
+            buildConfigField 'boolean', 'AUTO_DATA_SYNC_ENABLE', 'true'
+            buildConfigField 'boolean', 'SMS_ENABLE', 'true'
+            buildConfigField 'boolean', 'GUEST_LOGIN_ENABLE', 'false'
+            // URL List
+            buildConfigField 'String', 'DOWNLOAD_DATA_API', '"' + PROD_HOST + DOWNLOAD_URI + '"'
+            buildConfigField 'String', 'SUBMIT_DATA_API', '"' + PROD_HOST + SUBMIT_URI + '"'
+            buildConfigField 'String', 'CURRENT_VERSION_API', '"' + PROD_HOST + CURRENT_VERSION_URI + '"'
+            buildConfigField 'String', 'REPORTER_LOCATION_API', '"' + PROD_HOST + REPORTER_LOCATION_URI + '"'
+            buildConfigField 'String', 'DOWNLOAD_APP_URL', '"' + PROD_HOST + DOWNLOAD_APP_URI + '"'
+            // String Value
+            resValue "string", "app_name", "India Infrastructure Monitoring"
+            resValue "string", "header_title", "India Infrastructure Monitoring"
+        }
+        ningoStg {
+            STG_PORT = "22180"
+            applicationId "com.thetigerparty.argodfningo.stg"
+            buildConfigField 'String', 'SMS_NUMBER', '"' + SMS_NUMBER + '"'
+            buildConfigField 'int', 'DEFAULT_ROOT_CONTAINER_ID', "1"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LATITUDE', "5.7148735"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LONGITUDE', "0.1039839"
+            buildConfigField 'String', 'GIT_COMMIT_NUMBER', GIT_COMMIT_NUMBER
+
+            // Function Config
+            buildConfigField 'boolean', 'VIDEO_RECORD_ENABLE', 'true'
+            buildConfigField 'boolean', 'LOCATION_SERVICE_ENABLE', 'true'
+            buildConfigField 'boolean', 'CAPTION_ACTIVITY_ENABLE', 'true'
+            buildConfigField 'boolean', 'AUTO_DATA_SYNC_ENABLE', 'true'
+            buildConfigField 'boolean', 'SMS_ENABLE', 'true'
+            buildConfigField 'boolean', 'GUEST_LOGIN_ENABLE', 'true'
+            // URL List
+            buildConfigField 'String', 'DOWNLOAD_DATA_API', '"' + STG_HOST + ':' + STG_PORT + DOWNLOAD_URI + '"'
+            buildConfigField 'String', 'SUBMIT_DATA_API', '"' + STG_HOST + ':' + STG_PORT + SUBMIT_URI + '"'
+            buildConfigField 'String', 'CURRENT_VERSION_API', '"' + STG_HOST + ':' + STG_PORT + CURRENT_VERSION_URI + '"'
+            buildConfigField 'String', 'REPORTER_LOCATION_API', '"' + STG_HOST + ':' + STG_PORT + REPORTER_LOCATION_URI + '"'
+            buildConfigField 'String', 'DOWNLOAD_APP_URL', '"' + STG_HOST + ':' + STG_PORT + DOWNLOAD_APP_URI + '"'
+            // String Value
+            resValue "string", "app_name", "STG Ningo-Prampram District Assembly"
+            resValue "string", "header_title", "STG Ningo-Prampram District Assembly"
+        }
+        ningoProd {
+            PROD_HOST = "http://www.ningoprampram360.com"
+            applicationId "com.thetigerparty.argodfningo"
+            buildConfigField 'String', 'SMS_NUMBER', '"+233201746462"'
+            buildConfigField 'int', 'DEFAULT_ROOT_CONTAINER_ID', "1"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LATITUDE', "5.7148735"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LONGITUDE', "0.1039839"
+            buildConfigField 'String', 'GIT_COMMIT_NUMBER', GIT_COMMIT_NUMBER
+
+            // Function Config
+            buildConfigField 'boolean', 'VIDEO_RECORD_ENABLE', 'true'
+            buildConfigField 'boolean', 'LOCATION_SERVICE_ENABLE', 'true'
+            buildConfigField 'boolean', 'CAPTION_ACTIVITY_ENABLE', 'true'
+            buildConfigField 'boolean', 'AUTO_DATA_SYNC_ENABLE', 'true'
+            buildConfigField 'boolean', 'SMS_ENABLE', 'true'
+            buildConfigField 'boolean', 'GUEST_LOGIN_ENABLE', 'true'
+            // URL List
+            buildConfigField 'String', 'DOWNLOAD_DATA_API', '"' + PROD_HOST + DOWNLOAD_URI + '"'
+            buildConfigField 'String', 'SUBMIT_DATA_API', '"' + PROD_HOST + SUBMIT_URI + '"'
+            buildConfigField 'String', 'CURRENT_VERSION_API', '"' + PROD_HOST + CURRENT_VERSION_URI + '"'
+            buildConfigField 'String', 'REPORTER_LOCATION_API', '"' + PROD_HOST + REPORTER_LOCATION_URI + '"'
+            buildConfigField 'String', 'DOWNLOAD_APP_URL', '"' + PROD_HOST + DOWNLOAD_APP_URI + '"'
+            // String Value
+            resValue "string", "app_name", "Ningo-Prampram District Assembly"
+            resValue "string", "header_title", "Ningo-Prampram District Assembly"
+        }
+        zambiaStg {
+            STG_HOST = "http://38.140.20.92:23080"
+            applicationId "com.thetigerparty.argodfzambia"
+            buildConfigField 'int', 'DEFAULT_ROOT_CONTAINER_ID', "1"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LATITUDE', "-15.4166534"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LONGITUDE', "28.2737127"
+            buildConfigField 'String', 'SMS_NUMBER', '"' + SMS_NUMBER + '"'
+            buildConfigField 'String', 'GIT_COMMIT_NUMBER', GIT_COMMIT_NUMBER
+
+            // Function Config
+            buildConfigField 'boolean', 'VIDEO_RECORD_ENABLE', 'true'
+            buildConfigField 'boolean', 'LOCATION_SERVICE_ENABLE', 'true'
+            buildConfigField 'boolean', 'CAPTION_ACTIVITY_ENABLE', 'true'
+            buildConfigField 'boolean', 'AUTO_DATA_SYNC_ENABLE', 'true'
+            buildConfigField 'boolean', 'SMS_ENABLE', 'true'
+            buildConfigField 'boolean', 'GUEST_LOGIN_ENABLE', 'true'
+            // URL List
+            buildConfigField 'String', 'DOWNLOAD_DATA_API', '"' + STG_HOST + DOWNLOAD_URI + '"'
+            buildConfigField 'String', 'SUBMIT_DATA_API', '"' + STG_HOST + SUBMIT_URI + '"'
+            buildConfigField 'String', 'CURRENT_VERSION_API', '"' + STG_HOST + CURRENT_VERSION_URI + '"'
+            buildConfigField 'String', 'REPORTER_LOCATION_API', '"' + STG_HOST + REPORTER_LOCATION_URI + '"'
+            buildConfigField 'String', 'DOWNLOAD_APP_URL', '"' + STG_HOST + DOWNLOAD_APP_URI + '"'
+            // String Value
+            resValue "string", "app_name", "STG TI-Z"
+            resValue "string", "header_title", "STG TI-Z"
+        }
+        stmaStg {
+            STG_HOST = "http://125.227.249.37"
+            STG_PORT = "23380"
+            applicationId "com.thetigerparty.argodfstma"
+            buildConfigField 'String', 'SMS_NUMBER', '"' + SMS_NUMBER + '"'
+            buildConfigField 'int', 'DEFAULT_ROOT_CONTAINER_ID', "1"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LATITUDE', "5.7148735"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LONGITUDE', "0.1039839"
+            buildConfigField 'String', 'GIT_COMMIT_NUMBER', GIT_COMMIT_NUMBER
+
+            // Function Config
+            buildConfigField 'boolean', 'VIDEO_RECORD_ENABLE', 'true'
+            buildConfigField 'boolean', 'LOCATION_SERVICE_ENABLE', 'true'
+            buildConfigField 'boolean', 'CAPTION_ACTIVITY_ENABLE', 'true'
+            buildConfigField 'boolean', 'AUTO_DATA_SYNC_ENABLE', 'true'
+            buildConfigField 'boolean', 'SMS_ENABLE', 'false'
+            buildConfigField 'boolean', 'GUEST_LOGIN_ENABLE', 'true'
+            // URL List
+            buildConfigField 'String', 'DOWNLOAD_DATA_API', '"' + STG_HOST + ':' + STG_PORT + DOWNLOAD_URI + '"'
+            buildConfigField 'String', 'SUBMIT_DATA_API', '"' + STG_HOST + ':' + STG_PORT + SUBMIT_URI + '"'
+            buildConfigField 'String', 'CURRENT_VERSION_API', '"' + STG_HOST + ':' + STG_PORT + CURRENT_VERSION_URI + '"'
+            buildConfigField 'String', 'REPORTER_LOCATION_API', '"' + STG_HOST + ':' + STG_PORT + REPORTER_LOCATION_URI + '"'
+            buildConfigField 'String', 'DOWNLOAD_APP_URL', '"' + STG_HOST + ':' + STG_PORT + DOWNLOAD_APP_URI + '"'
+            // String Value
+            resValue "string", "app_name", "STG STMA"
+            resValue "string", "header_title", "STG STMA"
+        }
+        stmaProd {
+            PROD_HOST = "http://stma360.org"
+            applicationId "com.thetigerparty.argodfstma"
+            buildConfigField 'String', 'SMS_NUMBER', '"200112274"'
+            buildConfigField 'int', 'DEFAULT_ROOT_CONTAINER_ID', "1"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LATITUDE', "5.7148735"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LONGITUDE', "0.1039839"
+            buildConfigField 'String', 'GIT_COMMIT_NUMBER', GIT_COMMIT_NUMBER
+
+            // Function Config
+            buildConfigField 'boolean', 'VIDEO_RECORD_ENABLE', 'true'
+            buildConfigField 'boolean', 'LOCATION_SERVICE_ENABLE', 'true'
+            buildConfigField 'boolean', 'CAPTION_ACTIVITY_ENABLE', 'true'
+            buildConfigField 'boolean', 'AUTO_DATA_SYNC_ENABLE', 'true'
+            buildConfigField 'boolean', 'SMS_ENABLE', 'false'
+            buildConfigField 'boolean', 'GUEST_LOGIN_ENABLE', 'true'
+            // URL List
+            buildConfigField 'String', 'DOWNLOAD_DATA_API', '"' + PROD_HOST + DOWNLOAD_URI + '"'
+            buildConfigField 'String', 'SUBMIT_DATA_API', '"' + PROD_HOST + SUBMIT_URI + '"'
+            buildConfigField 'String', 'CURRENT_VERSION_API', '"' + PROD_HOST + CURRENT_VERSION_URI + '"'
+            buildConfigField 'String', 'REPORTER_LOCATION_API', '"' + PROD_HOST + REPORTER_LOCATION_URI + '"'
+            buildConfigField 'String', 'DOWNLOAD_APP_URL', '"' + PROD_HOST + DOWNLOAD_APP_URI + '"'
+            // String Value
+            resValue "string", "app_name", "STMA"
+            resValue "string", "header_title", "STMA"
+        }
+        iwaiStg {
+            STG_HOST = "http://125.227.249.37"
+            STG_PORT = "23580"
+            applicationId "com.thetigerparty.argodfiwai.stg"
+            buildConfigField 'String', 'SMS_NUMBER', '"' + SMS_NUMBER + '"'
+            buildConfigField 'int', 'DEFAULT_ROOT_CONTAINER_ID', "1"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LATITUDE', "23.7445515"
+            buildConfigField 'double', 'DEFAULT_MAP_CENTER_LONGITUDE', "83.9846212"
+            buildConfigField 'String', 'GIT_COMMIT_NUMBER', GIT_COMMIT_NUMBER
+
+            // Function Config
+            buildConfigField 'boolean', 'VIDEO_RECORD_ENABLE', 'true'
+            buildConfigField 'boolean', 'LOCATION_SERVICE_ENABLE', 'true'
+            buildConfigField 'boolean', 'CAPTION_ACTIVITY_ENABLE', 'true'
+            buildConfigField 'boolean', 'AUTO_DATA_SYNC_ENABLE', 'true'
+            buildConfigField 'boolean', 'SMS_ENABLE', 'false'
+            buildConfigField 'boolean', 'GUEST_LOGIN_ENABLE', 'true'
+            // URL List
+            buildConfigField 'String', 'DOWNLOAD_DATA_API', '"' + STG_HOST + ':' + STG_PORT + DOWNLOAD_URI + '"'
+            buildConfigField 'String', 'SUBMIT_DATA_API', '"' + STG_HOST + ':' + STG_PORT + SUBMIT_URI + '"'
+            buildConfigField 'String', 'CURRENT_VERSION_API', '"' + STG_HOST + ':' + STG_PORT + CURRENT_VERSION_URI + '"'
+            buildConfigField 'String', 'REPORTER_LOCATION_API', '"' + STG_HOST + ':' + STG_PORT + REPORTER_LOCATION_URI + '"'
+            buildConfigField 'String', 'DOWNLOAD_APP_URL', '"' + STG_HOST + ':' + STG_PORT + DOWNLOAD_APP_URI + '"'
+            // String Value
+            resValue "string", "app_name", "STG IWAI"
+            resValue "string", "header_title", "STG IWAI - Jal Marg Vikas Project"
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(
+                    output.outputFile.parent,
+                    "${variant.flavorName}.apk"
+            )
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.android.support:recyclerview-v7:23.4.0'
+    compile 'com.github.bumptech.glide:glide:4.3.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.3.0'
+    compile files('libs/activeandroid-3.1-beta.jar')
+    compile 'org.osmdroid:osmdroid-android:5.6@aar'
+    compile 'com.orhanobut:logger:1.15'
+    compile 'com.github.MKergall:osmbonuspack:6.4'
+    compile 'pub.devrel:easypermissions:1.0.0'
+}

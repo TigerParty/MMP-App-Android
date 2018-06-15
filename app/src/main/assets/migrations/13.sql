@@ -1,0 +1,1 @@
+ALTER TABLE form_field ADD COLUMN edit_level_priority INTEGER;

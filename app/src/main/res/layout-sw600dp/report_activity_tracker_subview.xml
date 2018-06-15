@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_mapview">
+        <org.osmdroid.views.MapView
+            android:id="@+id/mapview"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            tilesource="Mapnik" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:text="Route Tracking"
+            android:textSize="18sp"
+            android:id="@+id/text_tracking"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/mapview" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Location"
+            android:id="@+id/my_location"
+            android:layout_gravity="center_horizontal"
+            android:enabled="false"
+            android:layout_below="@+id/text_tracking"
+            android:layout_toStartOf="@+id/gps_start" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:id="@+id/gps_start"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@+id/text_tracking"
+            android:layout_centerHorizontal="true" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stop"
+            android:id="@+id/gps_pause"
+            android:enabled="false"
+            android:layout_below="@+id/text_tracking"
+            android:layout_toEndOf="@+id/gps_start" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="(GPS tracker data)"
+        android:id="@+id/text_message"
+        android:layout_below="@+id/layout_mapview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_status"
+        android:layout_below="@+id/text_message"
+        android:layout_alignStart="@+id/text_message"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Time Left:"
+            android:id="@+id/text_status" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/text_countdown"
+            android:layout_toEndOf="@+id/text_status" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_status">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Keep app open during track"
+            android:textSize="18sp"
+            android:id="@+id/text_keep_open"
+            android:gravity="center_horizontal"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+</RelativeLayout>

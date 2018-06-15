@@ -1,0 +1,152 @@
+<resources>
+    <!-- api strings -->
+    <string name="data_sync_api">api/data_sync</string>
+    <string name="submit_report_api">api/submit_report</string>
+    <string name="check_version_api">api/check_version</string>
+
+    <!-- download link -->
+    <string name="download_link">apk/argo.apk</string>
+
+    <!-- setting string-->
+    <string name="action_settings">Settings</string>
+
+    <!-- add a photo string-->
+    <string name="add_a_photo_title">Add a photo</string>
+
+    <!-- header strings -->
+    <!--<string name="header_title">STG ArgoDF Wontok</string>-->
+
+    <!-- LoginActivity strings -->
+    <string name="login_tv_username">Username</string>
+    <string name="login_tv_password">Password</string>
+    <string name="login_bt_login">Login</string>
+    <string name="login_bt_data_sync">Data Sync</string>
+    <string name="login_tv_last_sync_time">Last synced time: </string>
+    <string name="login_tv_not_sync_with_data">You have not synced with server</string>
+    <string name="login_tv_remind_sync1">Remember to Sync Data</string>
+    <string name="login_tv_remind_sync2">before Logging In</string>
+
+
+    <!-- MainActivity strings -->
+    <string name="main_bt_create">&#160;&#160; Create report for an issue</string>
+    <string name="main_bt_submit">&#160;&#160; Submit saved reports</string>
+    <string name="main_bt_logout">Logout</string>
+
+    <!-- ProjectListActivity strings -->
+    <string name="pl_et_hint_project_name">Search for issue or county</string>
+    <string name="pl_bt_search">Search</string>
+    <string name="pl_tv_project_name">Issue Name</string>
+    <string name="pl_bt_back">Back</string>
+    <string name="pl_content_bt_create_new_project">Create Report for a New Issue</string>
+
+    <!-- ProjectListContent strings -->
+    <string name="pl_content_tv_project_name">Issue name</string>
+    <string name="pl_content_bt_create">Create Report</string>
+    <string name="pl_content_bt_edit">Edit Report</string>
+
+    <!-- ReportActivity strings -->
+    <string name="report_tv_report_to">New Issue Name</string>
+    <string name="report_tv_category">Category</string>
+    <string name="report_tv_title">Title</string>
+    <string name="report_tv_description">Description</string>
+    <string name="report_tv_region">Region</string>
+    <string name="report_tv_district">District</string>
+    <string name="report_tv_report_type">Report Type</string>
+    <string name="report_tv_form">Form</string>
+    <string name="report_tv_lat">Latitude:  </string>
+    <string name="report_tv_lng">Longitude: </string>
+    <string name="report_tv_map_loading">Please wait&#8230;</string>
+    <string name="report_tv_attachment">Attachments</string>
+    <string name="report_bt_camera">Take picture</string>
+    <string name="report_bt_album">Select from album</string>
+    <string name="report_bt_record">Take video</string>
+    <string name="report_bt_save">Save</string>
+    <string name="report_bt_cancel">Cancel</string>
+
+    <!-- ReportListActivity strings -->
+    <string name="rl_tv_rl_for">Report List For</string>
+    <string name="rl_tv_project_name">School Name</string>
+    <string name="rl_et_hint_report_name">Report Name</string>
+    <string name="rl_bt_search">Search</string>
+    <string name="rl_tv_status">Status</string>
+    <string name="rl_tv_title">Title</string>
+    <string name="rl_tv_created_time">CreateTime</string>
+    <string name="rl_bt_back">Back</string>
+
+    <!-- ReportListContent strings -->
+    <string name="rl_content_tv_status">Status</string>
+    <string name="rl_content_tv_report_title">Report Title</string>
+    <string name="rl_content_bt_edit">Edit</string>
+
+    <!-- SubmitResultDialogContent strings -->
+    <string name="srd_content_tv_report_title">Title</string>
+    <string name="srd_content_tv_result">Result</string>
+
+    <!-- SubmitResultListContent strings -->
+    <string name="srl_content_tv_report_title">Report Title</string>
+    <string name="srl_content_tv_result">Result</string>
+
+    <!-- edit text error strings -->
+    <string name="et_error_should_numeric">Must be numeric</string>
+
+    <!-- toast string -->
+    <string name="data_sync_fail">Data synchronization failed, please try again later.</string>
+    <string name="data_sync_success">Data Sync Successful</string>
+    <string name="login_fail">Login failed. Please check your username and password.</string>
+    <string name="sync_data_first">You have to sync data first.</string>
+    <string name="check_internet_false">Please make sure you have connected internet.</string>
+    <string name="toast_search_no_result">No results match the search.</string>
+    <string name="no_report_submit">No report needs to be submitted.</string>
+    <string name="submit_finished">Submit reports finished.</string>
+    <string name="submit_success">Report has been submitted successfully.</string>
+    <string name="submit_fail">Submit report failed, please try again later.</string>
+    <string name="save_report_succeed">Save report successfully.</string>
+    <string name="save_report_fail">Save Report Fail. Please make sure that all fields are match the format.</string>
+    <string name="add_a_image">Please add a image file.</string>
+    <string name="save_report_fail_with_required_attachment">Attachment Required.</string>
+    <string name="save_report_fail_with_required_field">Please fill in all required fields.</string>
+    <string name="data_sync_timeout">Internet connection not stable. App will work in offline mode.</string>
+    <string name="data_sync_first_and_timeout">Internet connection not stable. Please try again later.</string>
+
+    <!-- progress dialog string -->
+    <string name="data_sync">Data syncing, please wait&#8230;</string>
+    <string name="submitting_report">Submitting report, please wait&#8230;</string>
+
+    <!-- alert dialog string -->
+    <string name="exit_app">Do you want to exit this app?</string>
+    <string name="cancel_this_report">Do you want to cancel this report?</string>
+    <string name="save_this_report">Do you want to save this report?</string>
+    <string name="delete_this_attachment">Do you want to remove this attachment?</string>
+    <string name="logout">Do you want to logout?</string>
+    <string name="over_max_attachments">Max attachments size is 6.</string>
+    <string name="need_to_update">There is a new version of the app that will now be downloaded.</string>
+    <string name="open_gps">Your GPS seems to be disabled, do you want to enable it?</string>
+    <string name="report_saved">Report saved successfully!</string>
+    <string name="submit_report_result">Submit result</string>
+    <string name="start_tracker">Do you want to record this tracker?</string>
+    <string name="gps_not_support">GPS service not support on this device.</string>
+    <string name="try_again_wifi">Please try again with wifi</string>
+    <string name="over_sms_limit">Over SMS limit</string>
+    <string name="sms_confirm">Your internet connection is unstable.\nDo you want to submit via SMS?\nNote: Images will not be sent</string>
+    <string name="sms_cancel">SMS Canceled</string>
+
+    <!-- submit report result string -->
+    <string name="submit_report_result_success">Success</string>
+    <string name="submit_report_result_fail">Fail</string>
+    <string name="submit_report_result_photo_required">Need Internet to submit</string>
+    <string name="submit_report_result_sms_limit">Exceed SMS limit</string>
+
+    <string name="sdf_ymd_hms">yyyy-MM-dd kk:mm:ss</string>
+    <string name="sdf_ymd">yyyy-MM-dd</string>
+    <!-- form type strings -->
+    <string-array name="list_type_name">
+        <item>School Report</item>
+    </string-array>
+
+    <string name="simple_date_format">yyyy-MM-dd kk:mm:ss</string>
+
+    <string name="subview_gps_tracker_init_latitude">0.00</string>
+    <string name="subview_gps_tracker_init_longitude">0.00</string>
+    <string name="subview_gps_tracker_location_format">#.#####</string>
+    <string name="subview_gps_tracker_countdown_time_format">HH:mm:ss</string>
+</resources>

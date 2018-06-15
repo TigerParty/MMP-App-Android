@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!-- tracker_activity_comment_fragment -->
+    <color name="tracker_activity_comment_fragment_background">#ffffff</color>
+    <color name="tracker_activity_comment_fragment_tv_comment">#595959</color>
+    <color name="tracker_activity_comment_fragment_et_comment">#000000</color>
+    <color name="tracker_activity_comment_fragment_et_comment_border">#787878</color>
+    <color name="tracker_activity_comment_fragment_et_comment_background">#ffffff</color>
+    <color name="tracker_activity_comment_fragment_bt_submit_text">#ffffff</color>
+    <color name="tracker_activity_comment_fragment_bt_submit_background">#0188fe</color>
+<!-- tracker_activity_tracker_fragment -->
+
+<!-- tracker_activity_location_fragment -->
+    <color name="tracker_activity_location_fragment_linearlayout_background">#ffffff</color>
+    <color name="tracker_activity_location_fragment_bt_confirm">#ffffff</color>
+
+<!-- tracker_activity_camera_fragment -->
+    <color name="tracker_activity_camera_fragment_frame_layout_background">#ffffff</color>
+    <color name="tracker_activity_camera_fragment_relative_layout_background">#000000</color>
+    <color name="tracker_activity_camera_fragment_bt_retake_background">#000000</color>
+    <color name="tracker_activity_camera_fragment_bt_retake_text">#ffffff</color>
+    <color name="tracker_activity_camera_fragment_bt_use_photo_background">#000000</color>
+    <color name="tracker_activity_camera_fragment_bt_use_photo_text">#ffffff</color>
+<!-- tracker_activity -->
+
+<!-- Transparent -->
+    <color name="transparent">#00000000</color>
+</resources>

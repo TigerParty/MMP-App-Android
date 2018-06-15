@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="max_attachments">6</integer>
+    <integer name="record_limit_second">300</integer>
+
+    <integer name="subview_gps_tracker_min_milliseconds">20000</integer>
+    <integer name="subview_gps_tracker_min_meters">10</integer>
+    <integer name="subview_gps_tracker_min_zoom_level">7</integer>
+    <integer name="subview_gps_tracker_max_zoom_level">15</integer>
+    <integer name="subview_gps_tracker_init_zoom_level">7</integer>
+    <integer name="subview_gps_tracker_auto_locate_zoom_level">9</integer>
+    <integer name="subview_gps_tracker_locations_limit">1400</integer>
+
+    <integer name="submit_via_sms_length">650</integer>
+
+    <integer name="tracker_fragment_min_milliseconds">20000</integer>
+    <integer name="tracker_fragment_min_meters">10</integer>
+
+    <integer name="tracker_fragment_init_zoom_level">17</integer>
+    <integer name="tracker_fragment_min_zoom_level">15</integer>
+    <integer name="tracker_fragment_max_zoom_level">20</integer>
+    <integer name="tracker_fragment_marker_image_size">130</integer>
+
+</resources>
